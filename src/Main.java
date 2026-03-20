@@ -15,9 +15,8 @@ public class Main {
         bogieIds.add("BG101");
         bogieIds.add("BG102");
         bogieIds.add("BG103");
-        bogieIds.add("BG101"); // Duplicate
-        bogieIds.add("BG102"); // Duplicate
-
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
         // Display Unique Bogie IDs
         System.out.println("\nBogie IDs after insertion (duplicates ignored):");
         System.out.println(bogieIds);
