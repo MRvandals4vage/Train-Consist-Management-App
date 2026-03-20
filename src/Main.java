@@ -20,6 +20,15 @@ public class Main {
         passengerBogies.add("AC Chair");
         passengerBogies.add("First Class");
 
+        // ADD Operation (including duplicates)
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        // Display Unique Bogie IDs
+        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
+        System.out.println(bogieIds);
         System.out.println("\nPassenger bogies after addition:");
         System.out.println(passengerBogies);
 
