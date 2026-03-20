@@ -1,28 +1,44 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
+      
+      
+      
+        System.out.println("=============================================");
+        System.out.println("     ====Train Consist Management APP===     ");
+        System.out.println("=============================================");
 
-        // Welcome Message
-        System.out.println("=== Train Consist Management App ===");
+      
+        // Passenger Bogie List
+        List<String> passengerBogies = new ArrayList<>();
 
-        // Create HashSet for Bogie IDs
-        Set<String> bogieIds = new HashSet<>();
+        // ADD Operation
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
 
-        // ADD Operation (including duplicates)
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101"); // Duplicate
-        bogieIds.add("BG102"); // Duplicate
+        System.out.println("\nPassenger bogies after addition:");
+        System.out.println(passengerBogies);
 
-        // Display Unique Bogie IDs
-        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
-        System.out.println(bogieIds);
+        // REMOVE Operation
+        passengerBogies.remove("AC Chair");
+
+        System.out.println("\nAfter removing 'AC Chair':");
+        System.out.println(passengerBogies);
+
+        // CHECK EXISTENCE
+        boolean exists = passengerBogies.contains("Sleeper");
+        System.out.println("\nDoes 'Sleeper' exist? " + exists);
+
+        // Final State
+        System.out.println("\nFinal passenger bogie list:");
+        System.out.println(passengerBogies);
 
         // Program continues...
-        System.out.println("\nSystem ensures all bogie IDs are unique.");
+        System.out.println("\nSystem ready for next operation.");
+
     }
 }
