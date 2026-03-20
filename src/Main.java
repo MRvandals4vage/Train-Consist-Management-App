@@ -7,10 +7,10 @@ public class Main {
         // Welcome Message
         System.out.println("=== Train Consist Management App ===");
 
-        // Create LinkedList for Train Consist
+
         LinkedList<String> trainConsist = new LinkedList<>();
 
-        // Add bogies (order matters)
+
         trainConsist.add("Engine");
         trainConsist.add("Sleeper");
         trainConsist.add("AC");
