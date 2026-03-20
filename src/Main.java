@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
@@ -97,6 +99,26 @@ public class Main {
 
         // Program continues...
         System.out.println("\nSystem ensures ordered and unique bogies.");
+
+        // Create HashMap for Bogie → Capacity mapping
+        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+
+        // Insert bogie capacities
+        bogieCapacityMap.put("Sleeper", 72);
+        bogieCapacityMap.put("AC Chair", 60);
+        bogieCapacityMap.put("First Class", 24);
+
+        // Display capacity details
+        System.out.println("\nBogie Capacity Details:");
+
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+            System.out.println("Bogie: " + entry.getKey() +
+                    " | Capacity: " + entry.getValue());
+        }
+
+        // Program continues...
+        System.out.println("\nSystem ready for capacity-based operations.");
+
 
     }
 }
