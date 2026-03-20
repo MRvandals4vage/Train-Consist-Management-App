@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Main {
 
@@ -77,6 +79,24 @@ public class Main {
 
         // Program continues...
         System.out.println("\nSystem ready for next operation.");
+
+        Set<String> trainFormation = new LinkedHashSet<>();
+
+        // ADD bogies
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
+
+        // Attempt to add duplicate
+        trainFormation.add("Sleeper"); // Duplicate (ignored)
+
+        // Display final formation
+        System.out.println("\nFinal Train Formation (Insertion Order Preserved):");
+        System.out.println(trainFormation);
+
+        // Program continues...
+        System.out.println("\nSystem ensures ordered and unique bogies.");
 
     }
 }
