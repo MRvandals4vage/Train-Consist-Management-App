@@ -1,44 +1,28 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
-      
-      
-      
-        System.out.println("=============================================");
-        System.out.println("     ====Train Consist Management APP===     ");
-        System.out.println("=============================================");
 
-      
-        // Passenger Bogie List
-        List<String> passengerBogies = new ArrayList<>();
+        // Welcome Message
+        System.out.println("=== Train Consist Management App ===");
 
-        // ADD Operation
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        // Create HashSet for Bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        System.out.println("\nPassenger bogies after addition:");
-        System.out.println(passengerBogies);
+        // ADD Operation (including duplicates)
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101"); // Duplicate
+        bogieIds.add("BG102"); // Duplicate
 
-        // REMOVE Operation
-        passengerBogies.remove("AC Chair");
-
-        System.out.println("\nAfter removing 'AC Chair':");
-        System.out.println(passengerBogies);
-
-        // CHECK EXISTENCE
-        boolean exists = passengerBogies.contains("Sleeper");
-        System.out.println("\nDoes 'Sleeper' exist? " + exists);
-
-        // Final State
-        System.out.println("\nFinal passenger bogie list:");
-        System.out.println(passengerBogies);
+        // Display Unique Bogie IDs
+        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
+        System.out.println(bogieIds);
 
         // Program continues...
-        System.out.println("\nSystem ready for next operation.");
-
+        System.out.println("\nSystem ensures all bogie IDs are unique.");
     }
 }
