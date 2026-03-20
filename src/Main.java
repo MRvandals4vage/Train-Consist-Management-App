@@ -45,7 +45,7 @@ public class Main {
         System.out.println("=============================================");
 
       
-        // Passenger Bogie List
+
         List<String> passengerBogies = new ArrayList<>();
 
         // ADD Operation
@@ -103,7 +103,7 @@ public class Main {
         // Create HashMap for Bogie → Capacity mapping
         Map<String, Integer> bogieCapacityMap = new HashMap<>();
 
-        // Insert bogie capacities
+
         bogieCapacityMap.put("Sleeper", 72);
         bogieCapacityMap.put("AC Chair", 60);
         bogieCapacityMap.put("First Class", 24);
