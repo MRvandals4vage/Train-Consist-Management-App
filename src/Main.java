@@ -1,124 +1,52 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.stream.Collectors;
 
-public class Main {
+// Assuming the Bogie class from previous Use Cases
+class Bogie {
+    String type;
+    int capacity;
 
+    public Bogie(String type, int capacity) {
+        this.type = type;
+        this.capacity = capacity;
+    }
+
+    @Override
+    public String toString() {
+        return "Bogie{Type='" + type + "', Capacity=" + capacity + "}";
+    }
+}
+
+public class TrainConsistManagementApp {
     public static void main(String[] args) {
+        // 1. Reuse/Create the Bogie list (UC7 Context)
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair Car", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("General", 80));
+        bogies.add(new Bogie("Sleeper", 72));
 
-        // Welcome Message
-        System.out.println("=== Train Consist Management App ===");
+        System.out.println("--- Original Consist ---");
+        bogies.forEach(System.out::println);
 
+        // 2. Convert to Stream, 3. Filter, 4. Collect
+        // Condition: Capacity > 60
+        List<Bogie> highCapacityBogies = bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+        // Note: In Java 16+, you can use .toList() directly
 
-        LinkedList<String> trainConsist = new LinkedList<>();
-
-
-        trainConsist.add("Engine");
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC");
-        trainConsist.add("Cargo");
-        trainConsist.add("Guard");
-
-        System.out.println("\nInitial Train Consist:");
-        System.out.println(trainConsist);
-
-        // Insert Pantry Car at position 2 (index 2)
-        trainConsist.add(2, "Pantry");
-
-        System.out.println("\nAfter adding Pantry at position 2:");
-        System.out.println(trainConsist);
-
-        // Remove first and last bogie
-        trainConsist.removeFirst();
-        trainConsist.removeLast();
-
-        System.out.println("\nAfter removing first and last bogie:");
-        System.out.println(trainConsist);
-      
-      
-      
-        System.out.println("=============================================");
-        System.out.println("     ====Train Consist Management APP===     ");
-        System.out.println("=============================================");
-
-      
-
-        List<String> passengerBogies = new ArrayList<>();
-
-        // ADD Operation
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
-
-        // ADD Operation (including duplicates)
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        // Display Unique Bogie IDs
-        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
-        System.out.println(bogieIds);
-        System.out.println("\nPassenger bogies after addition:");
-        System.out.println(passengerBogies);
-
-        // REMOVE Operation
-        passengerBogies.remove("AC Chair");
-
-        System.out.println("\nAfter removing 'AC Chair':");
-        System.out.println(passengerBogies);
-
-        // CHECK EXISTENCE
-        boolean exists = passengerBogies.contains("Sleeper");
-        System.out.println("\nDoes 'Sleeper' exist? " + exists);
-
-        // Final State
-        System.out.println("\nFinal passenger bogie list:");
-        System.out.println(passengerBogies);
-
-        // Program continues...
-        System.out.println("\nSystem ready for next operation.");
-
-        Set<String> trainFormation = new LinkedHashSet<>();
-
-        // ADD bogies
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
-
-        // Attempt to add duplicate
-        trainFormation.add("Sleeper"); // Duplicate (ignored)
-
-        // Display final formation
-        System.out.println("\nFinal Train Formation (Insertion Order Preserved):");
-        System.out.println(trainFormation);
-
-        // Program continues...
-        System.out.println("\nSystem ensures ordered and unique bogies.");
-
-        // Create HashMap for Bogie → Capacity mapping
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
-
-
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 60);
-        bogieCapacityMap.put("First Class", 24);
-
-        // Display capacity details
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        // 5. Display Filtered Bogies
+        System.out.println("\n--- High-Capacity Bogies (Capacity > 60) ---");
+        if (highCapacityBogies.isEmpty()) {
+            System.out.println("No bogies match the criteria.");
+        } else {
+            highCapacityBogies.forEach(System.out::println);
         }
 
-        // Program continues...
-        System.out.println("\nSystem ready for capacity-based operations.");
-
-
+        // Integrity Check: Original list remains unchanged
+        System.out.println("\nOriginal list size: " + bogies.size());
     }
 }
