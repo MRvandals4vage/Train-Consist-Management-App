@@ -1,124 +1,102 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.Map;
-
-public class Main {
-
-    public static void main(String[] args) {
-
-        // Welcome Message
-        System.out.println("=== Train Consist Management App ===");
-
-
-        LinkedList<String> trainConsist = new LinkedList<>();
-
-
-        trainConsist.add("Engine");
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC");
-        trainConsist.add("Cargo");
-        trainConsist.add("Guard");
-
-        System.out.println("\nInitial Train Consist:");
-        System.out.println(trainConsist);
-
-        // Insert Pantry Car at position 2 (index 2)
-        trainConsist.add(2, "Pantry");
-
-        System.out.println("\nAfter adding Pantry at position 2:");
-        System.out.println(trainConsist);
-
-        // Remove first and last bogie
-        trainConsist.removeFirst();
-        trainConsist.removeLast();
-
-        System.out.println("\nAfter removing first and last bogie:");
-        System.out.println(trainConsist);
-      
-      
-      
-        System.out.println("=============================================");
-        System.out.println("     ====Train Consist Management APP===     ");
-        System.out.println("=============================================");
-
-      
-
-        List<String> passengerBogies = new ArrayList<>();
-
-        // ADD Operation
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
-
-        // ADD Operation (including duplicates)
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        // Display Unique Bogie IDs
-        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
-        System.out.println(bogieIds);
-        System.out.println("\nPassenger bogies after addition:");
-        System.out.println(passengerBogies);
-
-        // REMOVE Operation
-        passengerBogies.remove("AC Chair");
-
-        System.out.println("\nAfter removing 'AC Chair':");
-        System.out.println(passengerBogies);
-
-        // CHECK EXISTENCE
-        boolean exists = passengerBogies.contains("Sleeper");
-        System.out.println("\nDoes 'Sleeper' exist? " + exists);
-
-        // Final State
-        System.out.println("\nFinal passenger bogie list:");
-        System.out.println(passengerBogies);
-
-        // Program continues...
-        System.out.println("\nSystem ready for next operation.");
-
-        Set<String> trainFormation = new LinkedHashSet<>();
-
-        // ADD bogies
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
-
-        // Attempt to add duplicate
-        trainFormation.add("Sleeper"); // Duplicate (ignored)
-
-        // Display final formation
-        System.out.println("\nFinal Train Formation (Insertion Order Preserved):");
-        System.out.println(trainFormation);
-
-        // Program continues...
-        System.out.println("\nSystem ensures ordered and unique bogies.");
-
-        // Create HashMap for Bogie → Capacity mapping
-        Map<String, Integer> bogieCapacityMap = new HashMap<>();
-
-
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 60);
-        bogieCapacityMap.put("First Class", 24);
-
-        // Display capacity details
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
-        }
-
-        // Program continues...
-        System.out.println("\nSystem ready for capacity-based operations.");
-
-
+// 1. Define the Custom Exception Class
+class InvalidCapacityException extends Exception {
+    public InvalidCapacityException(String message) {
+        super(message);
     }
 }
+
+// 2. Define the PassengerBogie class with Fail-Fast Validation
+class PassengerBogie {
+    private String type;
+    private int capacity;
+
+    public PassengerBogie(String type, int capacity) throws InvalidCapacityException {
+        if (capacity <= 0) {
+            throw new InvalidCapacityException("Capacity must be greater than zero");
+        }
+        this.type = type;
+        this.capacity = capacity;
+    }
+
+    // Getters
+    public String getType() { return type; }
+    public int getCapacity() { return capacity; }
+
+    @Override
+    public String toString() {
+        return "PassengerBogie{Type='" + type + "', Capacity=" + capacity + "}";
+    }
+}
+
+// 3. Main Application Class
+class Bogie {
+    String type;
+    int capacity;
+
+    public Bogie(String type, int capacity) {
+        this.type = type;
+        this.capacity = capacity;
+    }
+
+    public int getCapacity() { return capacity; }
+
+    @Override
+    public String toString() {
+        return "Bogie{Type='" + type + "', Capacity=" + capacity + "}";
+    }
+}
+
+public class TrainConsistManagementApp {
+    public static void main(String[] args) {
+        // 1. Create a list of bogies
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("General", 80));
+
+        // 2. Stream, 3. map() to extract capacity, 4. reduce() to sum
+        int totalSeats = bogies.stream()
+                .map(Bogie::getCapacity) // Extract only the numbers
+                .reduce(0, Integer::sum); // Start at 0, add every number found
+
+        // 5. Display the result
+        System.out.println("--- Train Capacity Analysis ---");
+        System.out.println("Total Bogies: " + bogies.size());
+        System.out.println("Total Seating Capacity: " + totalSeats);
+
+        // Verification of Original List Integrity
+        System.out.println("\nIntegrity Check: Original list still has " + bogies.size() + " bogies.");
+public class TrainConsistManagementApp {
+    public static void main(String[] args) {
+        System.out.println("=== Train Consist Management System: UC14 ===");
+
+        // Scenario A: Valid Bogie Creation
+        try {
+            System.out.println("\n[Action] Creating a standard Sleeper bogie...");
+            PassengerBogie s1 = new PassengerBogie("Sleeper", 72);
+            System.out.println("✅ Success: " + s1);
+        } catch (InvalidCapacityException e) {
+            System.err.println("❌ Error: " + e.getMessage());
+        }
+
+        // Scenario B: Zero Capacity Validation
+        try {
+            System.out.println("\n[Action] Creating an AC Chair bogie with 0 capacity...");
+            PassengerBogie s2 = new PassengerBogie("AC Chair", 0);
+            // This line will be skipped because an exception is thrown above
+            System.out.println("Success: " + s2);
+        } catch (InvalidCapacityException e) {
+            System.err.println(" Error: " + e.getMessage());
+        }
+
+        // Scenario C: Negative Capacity Validation
+        try {
+            System.out.println("\n[Action] Creating a First Class bogie with -10 capacity...");
+            PassengerBogie s3 = new PassengerBogie("First Class", -10);
+            System.out.println(" Success: " + s3);
+        } catch (InvalidCapacityException e) {
+            System.err.println(" Error: " + e.getMessage());
+        }
+
+        System.out.println("\n=== Program Execution Continued Safely ===");
